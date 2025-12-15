@@ -27,19 +27,38 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
      * @param string $name
      * @return string
      */
+    /**
+     * Normalize and truncate item FullName for QuickBooks.
+     */
     private function normalizeItemFullName($name)
     {
+        // Replace smart quotes and other common problem characters
+        $replacements = [
+            '“' => '"',
+            '”' => '"',
+            '‘' => "'",
+            '’' => "'",
+            '–' => '-',
+            '—' => '-',
+            '…' => '...'
+        ];
+        $name = strtr($name, $replacements);
+
+        // Remove any other non-ASCII characters if necessary, or just rely on UTF-8
+        // For now, let's just trim and truncate
         $name = trim((string) $name);
+
         if ($name === '') {
             return 'Unknown Item';
         }
+
         if (function_exists('mb_strlen')) {
             if (mb_strlen($name, 'UTF-8') > 30) {
                 return mb_substr($name, 0, 30, 'UTF-8');
             }
             return $name;
         }
-        // Fallback if mbstring not available
+
         if (strlen($name) > 30) {
             return substr($name, 0, 30);
         }
@@ -392,7 +411,9 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
 
         $response = @simplexml_load_string($object->response);
         if ($response === false) {
-            $this->log("Failed to parse response XML. Raw response: " . $object->response);
+            // Log the full object to see if there's an hresult or message
+            $debugInfo = var_export($object, true);
+            $this->log("Failed to parse response XML. Full Object: " . $debugInfo);
             return new ReceiveResponseXML(100);
         }
 
