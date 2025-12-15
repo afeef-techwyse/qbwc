@@ -1,0 +1,285 @@
+[27] Sent XML request at 2025-11-13 13:13:24
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-13 13:13:24
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-13 13:13:24
+[27] Received XML response at 2025-11-13 13:13:25
+Failed to parse response XML at 2025-11-13 13:13:25
+[28] Sent XML request at 2025-11-19 09:44:13
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 09:44:13
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 09:44:13
+[28] Received XML response at 2025-11-19 09:44:14
+Failed to parse response XML at 2025-11-19 09:44:14
+[29] Sent XML request at 2025-11-19 09:48:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 09:48:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 09:48:39
+[29] Received XML response at 2025-11-19 09:48:40
+Failed to parse response XML at 2025-11-19 09:48:40
+[30] Sent XML request at 2025-11-19 09:53:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 09:53:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 09:53:39
+[30] Received XML response at 2025-11-19 09:53:39
+Failed to parse response XML at 2025-11-19 09:53:39
+[31] Sent XML request at 2025-11-19 09:58:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 09:58:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 09:58:39
+[31] Received XML response at 2025-11-19 09:58:39
+Failed to parse response XML at 2025-11-19 09:58:39
+[32] Sent XML request at 2025-11-19 10:03:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:03:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:03:39
+[32] Received XML response at 2025-11-19 10:03:40
+Failed to parse response XML at 2025-11-19 10:03:40
+[33] Sent XML request at 2025-11-19 10:08:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:08:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:08:39
+[33] Received XML response at 2025-11-19 10:08:40
+Failed to parse response XML at 2025-11-19 10:08:40
+[34] Sent XML request at 2025-11-19 10:13:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:13:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:13:39
+[34] Received XML response at 2025-11-19 10:13:40
+Failed to parse response XML at 2025-11-19 10:13:40
+[35] Sent XML request at 2025-11-19 10:18:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:18:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:18:40
+[35] Received XML response at 2025-11-19 10:18:40
+Failed to parse response XML at 2025-11-19 10:18:40
+[36] Sent XML request at 2025-11-19 10:23:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:23:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:23:39
+[36] Received XML response at 2025-11-19 10:23:39
+Failed to parse response XML at 2025-11-19 10:23:39
+[37] Sent XML request at 2025-11-19 10:28:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:28:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:28:39
+[37] Received XML response at 2025-11-19 10:28:40
+Failed to parse response XML at 2025-11-19 10:28:40
+[38] Sent XML request at 2025-11-19 10:33:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:33:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:33:39
+[38] Received XML response at 2025-11-19 10:33:39
+Failed to parse response XML at 2025-11-19 10:33:39
+[39] Sent XML request at 2025-11-19 10:38:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:38:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:38:39
+[39] Received XML response at 2025-11-19 10:38:39
+Failed to parse response XML at 2025-11-19 10:38:39
+[40] Sent XML request at 2025-11-19 10:43:38
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:43:38
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:43:38
+[40] Received XML response at 2025-11-19 10:43:39
+Failed to parse response XML at 2025-11-19 10:43:39
+[41] Sent XML request at 2025-11-19 10:48:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:48:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:48:39
+[41] Received XML response at 2025-11-19 10:48:39
+Failed to parse response XML at 2025-11-19 10:48:39
+[42] Sent XML request at 2025-11-19 10:53:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:53:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:53:39
+[42] Received XML response at 2025-11-19 10:53:40
+Failed to parse response XML at 2025-11-19 10:53:40
+[43] Sent XML request at 2025-11-19 10:58:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 10:58:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 10:58:40
+[43] Received XML response at 2025-11-19 10:58:40
+Failed to parse response XML at 2025-11-19 10:58:40
+[44] Sent XML request at 2025-11-19 11:03:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:03:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:03:39
+[44] Received XML response at 2025-11-19 11:03:40
+Failed to parse response XML at 2025-11-19 11:03:40
+[45] Sent XML request at 2025-11-19 11:08:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:08:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:08:40
+[45] Received XML response at 2025-11-19 11:08:40
+Failed to parse response XML at 2025-11-19 11:08:40
+[46] Sent XML request at 2025-11-19 11:13:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:13:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:13:40
+[46] Received XML response at 2025-11-19 11:13:41
+Failed to parse response XML at 2025-11-19 11:13:41
+[47] Sent XML request at 2025-11-19 11:18:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:18:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:18:40
+[47] Received XML response at 2025-11-19 11:18:40
+Failed to parse response XML at 2025-11-19 11:18:40
+[48] Sent XML request at 2025-11-19 11:23:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:23:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:23:40
+[48] Received XML response at 2025-11-19 11:23:41
+Failed to parse response XML at 2025-11-19 11:23:41
+[49] Sent XML request at 2025-11-19 11:28:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:28:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:28:40
+[49] Received XML response at 2025-11-19 11:28:40
+Failed to parse response XML at 2025-11-19 11:28:40
+[50] Sent XML request at 2025-11-19 11:33:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:33:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:33:39
+[50] Received XML response at 2025-11-19 11:33:40
+Failed to parse response XML at 2025-11-19 11:33:40
+[51] Sent XML request at 2025-11-19 11:38:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:38:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:38:40
+[51] Received XML response at 2025-11-19 11:38:40
+Failed to parse response XML at 2025-11-19 11:38:40
+[52] Sent XML request at 2025-11-19 11:43:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:43:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:43:39
+[52] Received XML response at 2025-11-19 11:43:40
+Failed to parse response XML at 2025-11-19 11:43:40
+[53] Sent XML request at 2025-11-19 11:48:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:48:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:48:40
+[53] Received XML response at 2025-11-19 11:48:40
+Failed to parse response XML at 2025-11-19 11:48:40
+[54] Sent XML request at 2025-11-19 11:53:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:53:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:53:40
+[54] Received XML response at 2025-11-19 11:53:40
+Failed to parse response XML at 2025-11-19 11:53:40
+[55] Sent XML request at 2025-11-19 11:58:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 11:58:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 11:58:39
+[55] Received XML response at 2025-11-19 11:58:40
+Failed to parse response XML at 2025-11-19 11:58:40
+[56] Sent XML request at 2025-11-19 12:03:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:03:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:03:39
+[56] Received XML response at 2025-11-19 12:03:40
+Failed to parse response XML at 2025-11-19 12:03:40
+[57] Sent XML request at 2025-11-19 12:08:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:08:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:08:39
+[57] Received XML response at 2025-11-19 12:08:40
+Failed to parse response XML at 2025-11-19 12:08:40
+[58] Sent XML request at 2025-11-19 12:13:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:13:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:13:39
+[58] Received XML response at 2025-11-19 12:13:40
+Failed to parse response XML at 2025-11-19 12:13:40
+[59] Sent XML request at 2025-11-19 12:18:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:18:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:18:40
+[59] Received XML response at 2025-11-19 12:18:40
+Failed to parse response XML at 2025-11-19 12:18:40
+[60] Sent XML request at 2025-11-19 12:23:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:23:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:23:39
+[60] Received XML response at 2025-11-19 12:23:40
+Failed to parse response XML at 2025-11-19 12:23:40
+[61] Sent XML request at 2025-11-19 12:28:40
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:28:40
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:28:40
+[61] Received XML response at 2025-11-19 12:28:40
+Failed to parse response XML at 2025-11-19 12:28:40
+[62] Sent XML request at 2025-11-19 12:33:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:33:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:33:39
+[62] Received XML response at 2025-11-19 12:33:40
+Failed to parse response XML at 2025-11-19 12:33:40
+[63] Sent XML request at 2025-11-19 12:38:39
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:38:39
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:38:39
+[63] Received XML response at 2025-11-19 12:38:40
+Failed to parse response XML at 2025-11-19 12:38:40
+[64] Sent XML request at 2025-11-19 12:43:46
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:43:46
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:43:46
+[64] Received XML response at 2025-11-19 12:43:49
+Failed to parse response XML at 2025-11-19 12:43:49
+[65] Sent XML request at 2025-11-19 12:48:46
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:48:46
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:48:46
+[65] Received XML response at 2025-11-19 12:48:48
+Failed to parse response XML at 2025-11-19 12:48:48
+[66] Sent XML request at 2025-11-19 12:53:46
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 12:53:46
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 12:53:46
+[66] Received XML response at 2025-11-19 12:53:48
+Failed to parse response XML at 2025-11-19 12:53:48
+[67] Sent XML request at 2025-11-19 13:03:43
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:03:43
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:03:43
+[67] Received XML response at 2025-11-19 13:03:46
+Failed to parse response XML at 2025-11-19 13:03:46
+[68] Sent XML request at 2025-11-19 13:08:44
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:08:44
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:08:44
+[68] Received XML response at 2025-11-19 13:08:45
+Failed to parse response XML at 2025-11-19 13:08:45
+[69] Sent XML request at 2025-11-19 13:13:43
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:13:43
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:13:43
+[69] Received XML response at 2025-11-19 13:13:44
+Failed to parse response XML at 2025-11-19 13:13:44
+[70] Sent XML request at 2025-11-19 13:18:43
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:18:43
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:18:43
+[70] Received XML response at 2025-11-19 13:18:44
+Failed to parse response XML at 2025-11-19 13:18:44
+[71] Sent XML request at 2025-11-19 13:23:43
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:23:43
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:23:43
+[71] Received XML response at 2025-11-19 13:23:44
+Failed to parse response XML at 2025-11-19 13:23:44
+[72] Sent XML request at 2025-11-19 13:28:43
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:28:43
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:28:43
+[72] Received XML response at 2025-11-19 13:28:45
+Failed to parse response XML at 2025-11-19 13:28:45
+[73] Sent XML request at 2025-11-19 13:33:44
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:33:44
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:33:44
+[73] Received XML response at 2025-11-19 13:33:45
+Failed to parse response XML at 2025-11-19 13:33:45
+[74] Sent XML request at 2025-11-19 13:38:43
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 13:38:43
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 13:38:43
+[74] Received XML response at 2025-11-19 13:38:45
+Failed to parse response XML at 2025-11-19 13:38:45
+[75] Sent XML request at 2025-11-19 15:08:50
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:08:50
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:08:50
+[75] Received XML response at 2025-11-19 15:08:51
+Failed to parse response XML at 2025-11-19 15:08:51
+[76] Sent XML request at 2025-11-19 15:13:24
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:13:24
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:13:24
+[76] Received XML response at 2025-11-19 15:13:25
+Failed to parse response XML at 2025-11-19 15:13:25
+[77] Sent XML request at 2025-11-19 15:18:21
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:18:21
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:18:21
+[77] Received XML response at 2025-11-19 15:18:22
+Failed to parse response XML at 2025-11-19 15:18:22
+[78] Sent XML request at 2025-11-19 15:23:20
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:23:20
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:23:20
+[78] Received XML response at 2025-11-19 15:23:21
+Failed to parse response XML at 2025-11-19 15:23:21
+[79] Sent XML request at 2025-11-19 15:28:21
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:28:21
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:28:21
+[79] Received XML response at 2025-11-19 15:28:21
+Failed to parse response XML at 2025-11-19 15:28:21
+[80] Sent XML request at 2025-11-19 15:33:21
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:33:21
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:33:21
+[80] Received XML response at 2025-11-19 15:33:21
+Failed to parse response XML at 2025-11-19 15:33:21
+[81] Sent XML request at 2025-11-19 15:38:21
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:38:21
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:38:21
+[81] Received XML response at 2025-11-19 15:38:21
+Failed to parse response XML at 2025-11-19 15:38:21
+[82] Sent XML request at 2025-11-19 15:43:21
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-11-19 15:43:21
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-11-19 15:43:21
+[82] Received XML response at 2025-11-19 15:43:21
+Failed to parse response XML at 2025-11-19 15:43:21
+[83] Sent XML request at 2025-12-15 12:40:48
+Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-12-15 12:40:48
+Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-12-15 12:40:48
+[83] Received XML response at 2025-12-15 12:40:49
+Failed to parse response XML at 2025-12-15 12:40:49
