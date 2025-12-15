@@ -392,7 +392,7 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
 
         $response = @simplexml_load_string($object->response);
         if ($response === false) {
-            $this->log("Failed to parse response XML");
+            $this->log("Failed to parse response XML. Raw response: " . $object->response);
             return new ReceiveResponseXML(100);
         }
 

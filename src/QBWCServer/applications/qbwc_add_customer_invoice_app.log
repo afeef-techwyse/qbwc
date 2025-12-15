@@ -13,3 +13,351 @@ Stage: add_item -- Order: #2526031 (Customer: Stephanie Cunningham) at 2025-12-1
 Sending ItemNonInventoryAddRq XML for TOY-8313S at 2025-12-15 14:33:54
 [86] Received XML response at 2025-12-15 14:33:56
 Failed to parse response XML at 2025-12-15 14:33:56
+Fetched order payload (raw): "{\n    \"order_id\": 820982911946154508,\n    \"order_number\": \"#9999\",\n    \"created_at\": \"2025-12-15T09:28:01-05:00\",\n    \"items\": [\n        {\n            \"id\": 866550311766439020,\n            \"title\": \"12' Latte complete pool, Liner and Skimmer\",\n            \"description\": \"12' Latte complete pool, Liner and Skimmer\",\n            \"quantity\": 1,\n            \"price\": \"1499.00\",\n            \"sku\": \"CLAG12\",\n            \"vendor\": null\n        },\n        {\n            \"id\": 789012345678901234,\n            \"title\": \"Lens Protection Plan (2 Year)\",\n            \"description\": \"Lens Protection Plan (2 Year)\",\n            \"quantity\": 1,\n            \"price\": \"19.99\",\n            \"sku\": \"LENS-PROTECT-2YR\",\n            \"vendor\": null\n        },\n        {\n            \"id\": 890123456789012345,\n            \"title\": \"Premium Leather Case\",\n            \"description\": \"Premium Leather Case\",\n            \"quantity\ at 2025-12-15 14:40:53
+Fetched order payload (decoded): "{\n    \"order_id\": 820982911946154508,\n    \"order_number\": \"#9999\",\n    \"created_at\": \"2025-12-15T09:28:01-05:00\",\n    \"items\": [\n        {\n            \"id\": 866550311766439020,\n            \"title\": \"12' Latte complete pool, Liner and Skimmer\",\n            \"description\": \"12' Latte complete pool, Liner and Skimmer\",\n            \"quantity\": 1,\n            \"price\": \"1499.00\",\n            \"sku\": \"CLAG12\",\n            \"vendor\": null\n        },\n        {\n            \"id\": 789012345678901234,\n            \"title\": \"Lens Protection Plan (2 Year)\",\n            \"description\": \"Lens Protection Plan (2 Year)\",\n            \"quantity\": 1,\n            \"price\": \"19.99\",\n            \"sku\": \"LENS-PROTECT-2YR\",\n            \"vendor\": null\n        },\n        {\n            \"id\": 890123456789012345,\n            \"title\": \"Premium Leather Case\",\n            \"description\": \"Premium Leather Case\",\n            \"quantity\": 1,\n            \"price\": \"24.99\",\n            \"sku\": \"CASE-LEATHER-PREM\",\n            \"vendor\": null\n        },\n        {\n            \"id\": 141249953214522974,\n            \"title\": \"15' Latte Complete Pool, Liner and Skimmer - Colour\",\n            \"description\": \"15' Latte Complete Pool, Liner and Skimmer - Colour\",\n            \"quantity\": 1,\n            \"price\": \"0.00\",\n            \"sku\": \"CLAG15\",\n            \"vendor\": null\n        },\n        {\n            \"id\": 257004973105704598,\n            \"title\": \"18' Latte complete pool, Liner and Skimmer - Colour\",\n            \"description\": \"18' Latte complete pool, Liner and Skimmer - Colour\",\n            \"quantity\": 1,\n            \"price\": \"0.00\",\n            \"sku\": \"18' Latte complete pool, Liner and Skimmer - Colour\",\n            \"vendor\": null\n        }\n    ],\n    \"total_price\": \"1533.98\",\n    \"currency\": \"CAD\",\n    \"customer\": {\n        \"first_name\": \"John\",\n        \"last_name\": \"Smith\",\n        \"email\": \"john@example.com\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"Steve\",\n        \"address1\": \"123 Shipping Street\",\n        \"phone\": \"555-555-SHIP\",\n        \"city\": \"Shippington\",\n        \"zip\": \"40003\",\n        \"province\": \"Kentucky\",\n        \"country\": \"United States\",\n        \"last_name\": \"Shipper\",\n        \"address2\": null,\n        \"company\": \"Shipping Company\",\n        \"latitude\": null,\n        \"longitude\": null,\n        \"name\": \"Steve Shipper\",\n        \"country_code\": \"US\",\n        \"province_code\": \"KY\"\n    }\n}" at 2025-12-15 14:40:53
+transformShopifyOrder - raw shopifyData type: string at 2025-12-15 14:40:53
+transformShopifyOrder - attempting to decode JSON string at 2025-12-15 14:40:53
+transformShopifyOrder - successfully decoded JSON string at 2025-12-15 14:40:53
+transformShopifyOrder - shopifyData after decode: {"order_id":820982911946154508,"order_number":"#9999","created_at":"2025-12-15T09:28:01-05:00","items":[{"id":866550311766439020,"title":"12' Latte complete pool, Liner and Skimmer","description":"12' Latte complete pool, Liner and Skimmer","quantity":1,"price":"1499.00","sku":"CLAG12","vendor":null},{"id":789012345678901234,"title":"Lens Protection Plan (2 Year)","description":"Lens Protection Plan (2 Year)","quantity":1,"price":"19.99","sku":"LENS-PROTECT-2YR","vendor":null},{"id":890123456789012345,"title":"Premium Leather Case","description":"Premium Leather Case","quantity":1,"price":"24.99","sku":"CASE-LEATHER-PREM","vendor":null},{"id":141249953214522974,"title":"15' Latte Complete Pool, Liner and Skimmer - Colour","description":"15' Latte Complete Pool, Liner and Skimmer - Colour","quantity":1,"price":"0.00","sku":"CLAG15","vendor":null},{"id":257004973105704598,"title":"18' Latte complete pool, Liner and Skimmer - Colour","description":"18' Latte complete pool, Liner and Skimmer - Colour","quantity":1,"price":"0.00","sku":"18' Latte complete pool, Liner and Skimmer - Colour","vendor":null}],"total_price":"1533.98","currency":"CAD","customer":{"first_name":"John","last_name":"Smith","email":"john@example.com"},"shipping_address":{"first_name":"Steve","address1":"123 Shipping Street","phone":"555-555-SHIP","city":"Shippington","zip":"40003","province":"Kentucky","country":"United States","last_name":"Shipper","address2":null,"company":"Shipping Company","latitude":null,"longitude":null,"name":"Steve Shipper","country_code":"US","province_code":"KY"}} at 2025-12-15 14:40:53
+transformShopifyOrder - customer: {"first_name":"John","last_name":"Smith","email":"john@example.com"} at 2025-12-15 14:40:53
+transformShopifyOrder - shippingAddress: {"first_name":"Steve","address1":"123 Shipping Street","phone":"555-555-SHIP","city":"Shippington","zip":"40003","province":"Kentucky","country":"United States","last_name":"Shipper","address2":null,"company":"Shipping Company","latitude":null,"longitude":null,"name":"Steve Shipper","country_code":"US","province_code":"KY"} at 2025-12-15 14:40:53
+transformShopifyOrder - lineItems: [{"id":866550311766439020,"title":"12' Latte complete pool, Liner and Skimmer","description":"12' Latte complete pool, Liner and Skimmer","quantity":1,"price":"1499.00","sku":"CLAG12","vendor":null},{"id":789012345678901234,"title":"Lens Protection Plan (2 Year)","description":"Lens Protection Plan (2 Year)","quantity":1,"price":"19.99","sku":"LENS-PROTECT-2YR","vendor":null},{"id":890123456789012345,"title":"Premium Leather Case","description":"Premium Leather Case","quantity":1,"price":"24.99","sku":"CASE-LEATHER-PREM","vendor":null},{"id":141249953214522974,"title":"15' Latte Complete Pool, Liner and Skimmer - Colour","description":"15' Latte Complete Pool, Liner and Skimmer - Colour","quantity":1,"price":"0.00","sku":"CLAG15","vendor":null},{"id":257004973105704598,"title":"18' Latte complete pool, Liner and Skimmer - Colour","description":"18' Latte complete pool, Liner and Skimmer - Colour","quantity":1,"price":"0.00","sku":"18' Latte complete pool, Liner and Skimmer - Colour","vendor":null}] at 2025-12-15 14:40:53
+Fetched pending order: {"db_id":"17","id":820982911946154508,"order_number":"#9999","customer":{"first_name":"John","last_name":"Smith","email":"john@example.com","phone":"555-555-SHIP","default_address":{"company":"Shipping Company","address1":"123 Shipping Street","city":"Shippington","province":"Kentucky","zip":"40003","country":"United States"}},"line_items":[{"title":"CLAG12","name":"12' Latte complete pool, Liner and Skimmer","quantity":1,"price":"1499.00","description":"12' Latte complete pool, Liner and Skimmer"},{"title":"LENS-PROTECT-2YR","name":"Lens Protection Plan (2 Year)","quantity":1,"price":"19.99","description":"Lens Protection Plan (2 Year)"},{"title":"CASE-LEATHER-PREM","name":"Premium Leather Case","quantity":1,"price":"24.99","description":"Premium Leather Case"},{"title":"CLAG15","name":"15' Latte Complete Pool, Liner and Skimmer - Colour","quantity":1,"price":"0.00","description":"15' Latte Complete Pool, Liner and Skimmer - Colour"},{"title":"18' Latte complete pool, Liner","name":"18' Latte complete pool, Liner and Skimmer - Colour","quantity":1,"price":"0.00","description":"18' Latte complete pool, Liner and Skimmer - Colour"}]} at 2025-12-15 14:40:53
+[1] Sent XML request at 2025-12-15 14:40:53
+Stage: query_customer -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:40:53
+Sending CustomerQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <CustomerQueryRq requestID="{fef1deea-83ae-23f4-8dfd-1b312bd89d14}">
+      <FullName>John Smith</FullName>
+    </CustomerQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:40:53
+[1] Received XML response at 2025-12-15 14:40:54
+Current stage in receiveResponseXML: query_customer at 2025-12-15 14:40:54
+Customer NOT FOUND in QuickBooks --> Will add customer. at 2025-12-15 14:40:54
+[2] Sent XML request at 2025-12-15 14:40:55
+Stage: add_customer -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:40:55
+Sending CustomerAddRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <CustomerAddRq requestID="{d816772a-8307-5e14-b58d-421851a9d9f5}">
+      <CustomerAdd>
+        <Name>John Smith</Name>
+        <CompanyName>Shipping Company</CompanyName>
+        <FirstName>John</FirstName>
+        <LastName>Smith</LastName>
+        <BillAddress>
+          <Addr1>123 Shipping Street</Addr1>
+          <City>Shippington</City>
+          <State>Kentucky</State>
+          <PostalCode>40003</PostalCode>
+          <Country>United States</Country>
+        </BillAddress>
+        <Phone>555-555-SHIP</Phone>
+        <Email>john@example.com</Email>
+      </CustomerAdd>
+    </CustomerAddRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:40:55
+[2] Received XML response at 2025-12-15 14:40:56
+Current stage in receiveResponseXML: add_customer at 2025-12-15 14:40:56
+CustomerAdd completed. Moving to check items. at 2025-12-15 14:40:56
+[3] Sent XML request at 2025-12-15 14:40:56
+Stage: check_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:40:56
+Checking if item exists: CLAG12 at 2025-12-15 14:40:56
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{6fe09658-1adb-a084-4533-a2684fd8ffab}">
+      <FullName>CLAG12</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:40:56
+[3] Received XML response at 2025-12-15 14:40:57
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:40:57
+Item missing: CLAG12 — will add it. at 2025-12-15 14:40:57
+[4] Sent XML request at 2025-12-15 14:40:58
+Stage: add_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:40:58
+Sending ItemNonInventoryAddRq XML for CLAG12 at 2025-12-15 14:40:58
+[4] Received XML response at 2025-12-15 14:40:59
+Current stage in receiveResponseXML: add_item at 2025-12-15 14:40:59
+Item added: CLAG12 at 2025-12-15 14:40:59
+[5] Sent XML request at 2025-12-15 14:40:59
+Stage: check_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:40:59
+Checking if item exists: LENS-PROTECT-2YR at 2025-12-15 14:40:59
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{88f1a26c-218e-a4c4-0d62-5dc47d9a6ee2}">
+      <FullName>LENS-PROTECT-2YR</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:40:59
+[5] Received XML response at 2025-12-15 14:41:00
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:41:00
+Item missing: LENS-PROTECT-2YR — will add it. at 2025-12-15 14:41:00
+[6] Sent XML request at 2025-12-15 14:41:01
+Stage: add_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:01
+Sending ItemNonInventoryAddRq XML for LENS-PROTECT-2YR at 2025-12-15 14:41:01
+[6] Received XML response at 2025-12-15 14:41:01
+Current stage in receiveResponseXML: add_item at 2025-12-15 14:41:01
+Item added: LENS-PROTECT-2YR at 2025-12-15 14:41:01
+[7] Sent XML request at 2025-12-15 14:41:02
+Stage: check_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:02
+Checking if item exists: CASE-LEATHER-PREM at 2025-12-15 14:41:02
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{2702ae45-864f-9104-adef-f1f71272b987}">
+      <FullName>CASE-LEATHER-PREM</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:41:02
+[7] Received XML response at 2025-12-15 14:41:03
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:41:03
+Item missing: CASE-LEATHER-PREM — will add it. at 2025-12-15 14:41:03
+[8] Sent XML request at 2025-12-15 14:41:04
+Stage: add_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:04
+Sending ItemNonInventoryAddRq XML for CASE-LEATHER-PREM at 2025-12-15 14:41:04
+[8] Received XML response at 2025-12-15 14:41:04
+Current stage in receiveResponseXML: add_item at 2025-12-15 14:41:04
+Item added: CASE-LEATHER-PREM at 2025-12-15 14:41:04
+[9] Sent XML request at 2025-12-15 14:41:05
+Stage: check_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:05
+Checking if item exists: CLAG15 at 2025-12-15 14:41:05
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{82d7658b-73c1-7ca4-89e2-24c0bdc1ff3b}">
+      <FullName>CLAG15</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:41:05
+[9] Received XML response at 2025-12-15 14:41:06
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:41:06
+Item missing: CLAG15 — will add it. at 2025-12-15 14:41:06
+[10] Sent XML request at 2025-12-15 14:41:06
+Stage: add_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:06
+Sending ItemNonInventoryAddRq XML for CLAG15 at 2025-12-15 14:41:06
+[10] Received XML response at 2025-12-15 14:41:07
+Current stage in receiveResponseXML: add_item at 2025-12-15 14:41:07
+Item added: CLAG15 at 2025-12-15 14:41:07
+[11] Sent XML request at 2025-12-15 14:41:08
+Stage: check_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:08
+Checking if item exists: 18' Latte complete pool, Liner at 2025-12-15 14:41:08
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{2425e2c4-d201-a764-8d6e-942b1b9013fc}">
+      <FullName>18' Latte complete pool, Liner</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:41:08
+[11] Received XML response at 2025-12-15 14:41:09
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:41:09
+Item missing: 18' Latte complete pool, Liner — will add it. at 2025-12-15 14:41:09
+[12] Sent XML request at 2025-12-15 14:41:09
+Stage: add_item -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:09
+Sending ItemNonInventoryAddRq XML for 18' Latte complete pool, Liner at 2025-12-15 14:41:09
+[12] Received XML response at 2025-12-15 14:41:10
+Current stage in receiveResponseXML: add_item at 2025-12-15 14:41:10
+Item added: 18' Latte complete pool, Liner at 2025-12-15 14:41:10
+[13] Sent XML request at 2025-12-15 14:41:11
+Stage: add_invoice -- Order: #9999 (Customer: John Smith) at 2025-12-15 14:41:11
+Preparing InvoiceAdd for order #9999 at 2025-12-15 14:41:11
+Sending InvoiceAddRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <InvoiceAddRq requestID="{15fbe8f4-607f-4bc4-55b6-3247020167d6}">
+      <InvoiceAdd>
+        <CustomerRef><FullName>John Smith</FullName></CustomerRef>
+        <RefNumber>#9999</RefNumber>
+        <Memo>Order ##9999</Memo>
+        <InvoiceLineAdd>
+          <ItemRef><FullName>CLAG12</FullName></ItemRef>
+          <Desc>12' Latte complete pool, Liner and Skimmer</Desc>
+          <Quantity>1</Quantity>
+          <Rate>1499.00</Rate>
+          <Amount>1499.00</Amount>
+        </InvoiceLineAdd>
+        <InvoiceLineAdd>
+          <ItemRef><FullName>LENS-PROTECT-2YR</FullName></ItemRef>
+          <Desc>Lens Protection Plan (2 Year)</Desc>
+          <Quantity>1</Quantity>
+          <Rate>19.99</Rate>
+          <Amount>19.99</Amount>
+        </InvoiceLineAdd>
+        <InvoiceLineAdd>
+          <ItemRef><FullName>CASE-LEATHER-PREM</FullName></ItemRef>
+          <Desc>Premium Leather Case</Desc>
+          <Quantity>1</Quantity>
+          <Rate>24.99</Rate>
+          <Amount>24.99</Amount>
+        </InvoiceLineAdd>
+        <InvoiceLineAdd>
+          <ItemRef><FullName>CLAG15</FullName></ItemRef>
+          <Desc>15' Latte Complete Pool, Liner and Skimmer - Colour</Desc>
+          <Quantity>1</Quantity>
+          <Rate>0.00</Rate>
+          <Amount>0.00</Amount>
+        </InvoiceLineAdd>
+        <InvoiceLineAdd>
+          <ItemRef><FullName>18' Latte complete pool, Liner</FullName></ItemRef>
+          <Desc>18' Latte complete pool, Liner and Skimmer - Colour</Desc>
+          <Quantity>1</Quantity>
+          <Rate>0.00</Rate>
+          <Amount>0.00</Amount>
+        </InvoiceLineAdd>
+      </InvoiceAdd>
+    </InvoiceAddRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:41:11
+[13] Received XML response at 2025-12-15 14:41:12
+Current stage in receiveResponseXML: add_invoice at 2025-12-15 14:41:12
+InvoiceAdd completed for Order ##9999 at 2025-12-15 14:41:12
+Updated order 17 status to: invoice_done at 2025-12-15 14:41:12
+No pending orders found at 2025-12-15 14:41:12
+No more pending orders. Done! at 2025-12-15 14:41:12
+Fetched order payload (raw): "{\n    \"order_id\": 6775764123959,\n    \"order_number\": \"#1004\",\n    \"created_at\": \"2025-12-15T09:45:18-05:00\",\n    \"items\": [\n        {\n            \"id\": 16689885217079,\n            \"title\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"description\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"quantity\": 1,\n            \"price\": \"2515.99\",\n            \"sku\": \"AG1052PT\",\n            \"vendor\": \"PTL Staging\"\n        }\n    ],\n    \"total_price\": \"2515.99\",\n    \"currency\": \"CAD\",\n    \"customer\": {\n        \"first_name\": \"TechWyse\",\n        \"last_name\": \"Test\",\n        \"email\": \"oasis@techwyseintl.com\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"TechWyse\",\n        \"address1\": \"1444 Dupont Street\",\n        \"phone\": null,\n        \"city\": \"Toronto\",\n        \"zip\": \"M6P 3S1\",\n        \"province\": \"Ontario\",\ at 2025-12-15 14:45:46
+Fetched order payload (decoded): "{\n    \"order_id\": 6775764123959,\n    \"order_number\": \"#1004\",\n    \"created_at\": \"2025-12-15T09:45:18-05:00\",\n    \"items\": [\n        {\n            \"id\": 16689885217079,\n            \"title\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"description\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"quantity\": 1,\n            \"price\": \"2515.99\",\n            \"sku\": \"AG1052PT\",\n            \"vendor\": \"PTL Staging\"\n        }\n    ],\n    \"total_price\": \"2515.99\",\n    \"currency\": \"CAD\",\n    \"customer\": {\n        \"first_name\": \"TechWyse\",\n        \"last_name\": \"Test\",\n        \"email\": \"oasis@techwyseintl.com\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"TechWyse\",\n        \"address1\": \"1444 Dupont Street\",\n        \"phone\": null,\n        \"city\": \"Toronto\",\n        \"zip\": \"M6P 3S1\",\n        \"province\": \"Ontario\",\n        \"country\": \"Canada\",\n        \"last_name\": \"Test\",\n        \"address2\": null,\n        \"company\": null,\n        \"latitude\": 43.6666611,\n        \"longitude\": -79.4497319,\n        \"name\": \"TechWyse Test\",\n        \"country_code\": \"CA\",\n        \"province_code\": \"ON\"\n    }\n}" at 2025-12-15 14:45:46
+transformShopifyOrder - raw shopifyData type: string at 2025-12-15 14:45:46
+transformShopifyOrder - attempting to decode JSON string at 2025-12-15 14:45:46
+transformShopifyOrder - successfully decoded JSON string at 2025-12-15 14:45:46
+transformShopifyOrder - shopifyData after decode: {"order_id":6775764123959,"order_number":"#1004","created_at":"2025-12-15T09:45:18-05:00","items":[{"id":16689885217079,"title":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","description":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","quantity":1,"price":"2515.99","sku":"AG1052PT","vendor":"PTL Staging"}],"total_price":"2515.99","currency":"CAD","customer":{"first_name":"TechWyse","last_name":"Test","email":"oasis@techwyseintl.com"},"shipping_address":{"first_name":"TechWyse","address1":"1444 Dupont Street","phone":null,"city":"Toronto","zip":"M6P 3S1","province":"Ontario","country":"Canada","last_name":"Test","address2":null,"company":null,"latitude":43.6666611,"longitude":-79.4497319,"name":"TechWyse Test","country_code":"CA","province_code":"ON"}} at 2025-12-15 14:45:46
+transformShopifyOrder - customer: {"first_name":"TechWyse","last_name":"Test","email":"oasis@techwyseintl.com"} at 2025-12-15 14:45:46
+transformShopifyOrder - shippingAddress: {"first_name":"TechWyse","address1":"1444 Dupont Street","phone":null,"city":"Toronto","zip":"M6P 3S1","province":"Ontario","country":"Canada","last_name":"Test","address2":null,"company":null,"latitude":43.6666611,"longitude":-79.4497319,"name":"TechWyse Test","country_code":"CA","province_code":"ON"} at 2025-12-15 14:45:46
+transformShopifyOrder - lineItems: [{"id":16689885217079,"title":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","description":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","quantity":1,"price":"2515.99","sku":"AG1052PT","vendor":"PTL Staging"}] at 2025-12-15 14:45:46
+Fetched pending order: {"db_id":"18","id":6775764123959,"order_number":"#1004","customer":{"first_name":"TechWyse","last_name":"Test","email":"oasis@techwyseintl.com","phone":"","default_address":{"company":"","address1":"1444 Dupont Street","city":"Toronto","province":"Ontario","zip":"M6P 3S1","country":"Canada"}},"line_items":[{"title":"AG1052PT","name":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","quantity":1,"price":"2515.99","description":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel"}]} at 2025-12-15 14:45:46
+[1] Sent XML request at 2025-12-15 14:45:46
+Stage: query_customer -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:45:46
+Sending CustomerQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <CustomerQueryRq requestID="{1a1a0dce-506f-ed74-c104-2315e470637c}">
+      <FullName>TechWyse Test</FullName>
+    </CustomerQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:45:46
+[1] Received XML response at 2025-12-15 14:45:47
+Current stage in receiveResponseXML: query_customer at 2025-12-15 14:45:47
+Customer NOT FOUND in QuickBooks --> Will add customer. at 2025-12-15 14:45:47
+[2] Sent XML request at 2025-12-15 14:45:48
+Stage: add_customer -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:45:48
+Sending CustomerAddRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <CustomerAddRq requestID="{7147ec1a-a105-a814-7940-aca4fbe0292f}">
+      <CustomerAdd>
+        <Name>TechWyse Test</Name>
+        <CompanyName></CompanyName>
+        <FirstName>TechWyse</FirstName>
+        <LastName>Test</LastName>
+        <BillAddress>
+          <Addr1>1444 Dupont Street</Addr1>
+          <City>Toronto</City>
+          <State>Ontario</State>
+          <PostalCode>M6P 3S1</PostalCode>
+          <Country>Canada</Country>
+        </BillAddress>
+        <Phone></Phone>
+        <Email>oasis@techwyseintl.com</Email>
+      </CustomerAdd>
+    </CustomerAddRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:45:48
+[2] Received XML response at 2025-12-15 14:45:49
+Current stage in receiveResponseXML: add_customer at 2025-12-15 14:45:49
+CustomerAdd completed. Moving to check items. at 2025-12-15 14:45:49
+[3] Sent XML request at 2025-12-15 14:45:50
+Stage: check_item -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:45:50
+Checking if item exists: AG1052PT at 2025-12-15 14:45:50
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{15c9ef88-9d96-ce64-7d09-6b226b0e0ef3}">
+      <FullName>AG1052PT</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:45:50
+[3] Received XML response at 2025-12-15 14:45:51
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:45:51
+Item missing: AG1052PT — will add it. at 2025-12-15 14:45:51
+[4] Sent XML request at 2025-12-15 14:45:51
+Stage: add_item -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:45:51
+Sending ItemNonInventoryAddRq XML for AG1052PT at 2025-12-15 14:45:51
+[4] Received XML response at 2025-12-15 14:45:53
+Failed to parse response XML at 2025-12-15 14:45:53
+[5] Sent XML request at 2025-12-15 14:47:20
+Stage: add_item -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:47:20
+Sending ItemNonInventoryAddRq XML for AG1052PT at 2025-12-15 14:47:20
+[5] Received XML response at 2025-12-15 14:47:21
+Failed to parse response XML at 2025-12-15 14:47:21
+Fetched order payload (raw): "{\n    \"order_id\": 6775764123959,\n    \"order_number\": \"#1004\",\n    \"created_at\": \"2025-12-15T09:45:18-05:00\",\n    \"items\": [\n        {\n            \"id\": 16689885217079,\n            \"title\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"description\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"quantity\": 1,\n            \"price\": \"2515.99\",\n            \"sku\": \"AG1052PT\",\n            \"vendor\": \"PTL Staging\"\n        }\n    ],\n    \"total_price\": \"2515.99\",\n    \"currency\": \"CAD\",\n    \"customer\": {\n        \"first_name\": \"TechWyse\",\n        \"last_name\": \"Test\",\n        \"email\": \"oasis@techwyseintl.com\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"TechWyse\",\n        \"address1\": \"1444 Dupont Street\",\n        \"phone\": null,\n        \"city\": \"Toronto\",\n        \"zip\": \"M6P 3S1\",\n        \"province\": \"Ontario\",\ at 2025-12-15 14:48:21
+Fetched order payload (decoded): "{\n    \"order_id\": 6775764123959,\n    \"order_number\": \"#1004\",\n    \"created_at\": \"2025-12-15T09:45:18-05:00\",\n    \"items\": [\n        {\n            \"id\": 16689885217079,\n            \"title\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"description\": \"Playtime Tempest - 10ft round - 52\\u201d Wall Height - All Steel\",\n            \"quantity\": 1,\n            \"price\": \"2515.99\",\n            \"sku\": \"AG1052PT\",\n            \"vendor\": \"PTL Staging\"\n        }\n    ],\n    \"total_price\": \"2515.99\",\n    \"currency\": \"CAD\",\n    \"customer\": {\n        \"first_name\": \"TechWyse\",\n        \"last_name\": \"Test\",\n        \"email\": \"oasis@techwyseintl.com\"\n    },\n    \"shipping_address\": {\n        \"first_name\": \"TechWyse\",\n        \"address1\": \"1444 Dupont Street\",\n        \"phone\": null,\n        \"city\": \"Toronto\",\n        \"zip\": \"M6P 3S1\",\n        \"province\": \"Ontario\",\n        \"country\": \"Canada\",\n        \"last_name\": \"Test\",\n        \"address2\": null,\n        \"company\": null,\n        \"latitude\": 43.6666611,\n        \"longitude\": -79.4497319,\n        \"name\": \"TechWyse Test\",\n        \"country_code\": \"CA\",\n        \"province_code\": \"ON\"\n    }\n}" at 2025-12-15 14:48:21
+transformShopifyOrder - raw shopifyData type: string at 2025-12-15 14:48:21
+transformShopifyOrder - attempting to decode JSON string at 2025-12-15 14:48:21
+transformShopifyOrder - successfully decoded JSON string at 2025-12-15 14:48:21
+transformShopifyOrder - shopifyData after decode: {"order_id":6775764123959,"order_number":"#1004","created_at":"2025-12-15T09:45:18-05:00","items":[{"id":16689885217079,"title":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","description":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","quantity":1,"price":"2515.99","sku":"AG1052PT","vendor":"PTL Staging"}],"total_price":"2515.99","currency":"CAD","customer":{"first_name":"TechWyse","last_name":"Test","email":"oasis@techwyseintl.com"},"shipping_address":{"first_name":"TechWyse","address1":"1444 Dupont Street","phone":null,"city":"Toronto","zip":"M6P 3S1","province":"Ontario","country":"Canada","last_name":"Test","address2":null,"company":null,"latitude":43.6666611,"longitude":-79.4497319,"name":"TechWyse Test","country_code":"CA","province_code":"ON"}} at 2025-12-15 14:48:21
+transformShopifyOrder - customer: {"first_name":"TechWyse","last_name":"Test","email":"oasis@techwyseintl.com"} at 2025-12-15 14:48:21
+transformShopifyOrder - shippingAddress: {"first_name":"TechWyse","address1":"1444 Dupont Street","phone":null,"city":"Toronto","zip":"M6P 3S1","province":"Ontario","country":"Canada","last_name":"Test","address2":null,"company":null,"latitude":43.6666611,"longitude":-79.4497319,"name":"TechWyse Test","country_code":"CA","province_code":"ON"} at 2025-12-15 14:48:21
+transformShopifyOrder - lineItems: [{"id":16689885217079,"title":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","description":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","quantity":1,"price":"2515.99","sku":"AG1052PT","vendor":"PTL Staging"}] at 2025-12-15 14:48:21
+Fetched pending order: {"db_id":"18","id":6775764123959,"order_number":"#1004","customer":{"first_name":"TechWyse","last_name":"Test","email":"oasis@techwyseintl.com","phone":"","default_address":{"company":"","address1":"1444 Dupont Street","city":"Toronto","province":"Ontario","zip":"M6P 3S1","country":"Canada"}},"line_items":[{"title":"AG1052PT","name":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel","quantity":1,"price":"2515.99","description":"Playtime Tempest - 10ft round - 52\u201d Wall Height - All Steel"}]} at 2025-12-15 14:48:21
+[1] Sent XML request at 2025-12-15 14:48:21
+Stage: query_customer -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:48:21
+Sending CustomerQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <CustomerQueryRq requestID="{4142d969-7a3e-1694-895f-f1e23d338371}">
+      <FullName>TechWyse Test</FullName>
+    </CustomerQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:48:21
+[1] Received XML response at 2025-12-15 14:48:22
+Current stage in receiveResponseXML: query_customer at 2025-12-15 14:48:22
+Customer EXISTS in QuickBooks --> Skipping add, moving to check items. at 2025-12-15 14:48:22
+[2] Sent XML request at 2025-12-15 14:48:23
+Stage: check_item -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:48:23
+Checking if item exists: AG1052PT at 2025-12-15 14:48:23
+Sending ItemQueryRq XML:
+<?xml version="1.0" encoding="utf-8"?>
+<?qbxml version="17.0"?>
+<QBXML>
+  <QBXMLMsgsRq onError="stopOnError">
+    <ItemQueryRq requestID="{b499973e-8951-8464-9d6a-2edbf81d2166}">
+      <FullName>AG1052PT</FullName>
+    </ItemQueryRq>
+  </QBXMLMsgsRq>
+</QBXML> at 2025-12-15 14:48:23
+[2] Received XML response at 2025-12-15 14:48:24
+Current stage in receiveResponseXML: check_item at 2025-12-15 14:48:24
+Item missing: AG1052PT — will add it. at 2025-12-15 14:48:24
+[3] Sent XML request at 2025-12-15 14:48:25
+Stage: add_item -- Order: #1004 (Customer: TechWyse Test) at 2025-12-15 14:48:25
+Sending ItemNonInventoryAddRq XML for AG1052PT at 2025-12-15 14:48:25
+[3] Received XML response at 2025-12-15 14:48:26
+Failed to parse response XML at 2025-12-15 14:48:26
