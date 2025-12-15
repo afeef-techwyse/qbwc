@@ -161,14 +161,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($orderData['id'])) {
                 // Calculate total price
                 $totalPrice = floatval($baseItem['price']) * $baseItem['quantity'];
 
-                // Build description including sub items only
-                // Format each sub item as: trimmed_title:variant_title
+                // Helper to format properties
+                $formatProperties = function ($item) {
+                    $props = [];
+                    if (isset($item['properties']) && is_array($item['properties'])) {
+                        foreach ($item['properties'] as $prop) {
+                            // Skip internal properties starting with _
+                            if (isset($prop['name']) && strpos($prop['name'], '_') !== 0) {
+                                $props[] = $prop['name'] . ': ' . $prop['value'];
+                            }
+                        }
+                    }
+                    return $props;
+                };
+
+                // Build description
                 $descriptionParts = [];
+
+                // 1. Add Base Item Properties
+                $baseProps = $formatProperties($baseItem);
+                foreach ($baseProps as $p) {
+                    $descriptionParts[] = $p;
+                }
+
                 $baseTitle = isset($baseItem['title']) ? $baseItem['title'] : '';
+
                 foreach ($subItems as $subItem) {
                     $totalPrice += floatval($subItem['price']) * $subItem['quantity'];
 
-                    // Determine trimmed title: remove base title prefix if present at start
+                    // Determine trimmed title
                     $subTitle = isset($subItem['title']) ? $subItem['title'] : '';
                     $trimmed = $subTitle;
                     if ($baseTitle !== '' && strpos($subTitle, $baseTitle) === 0) {
@@ -177,20 +198,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($orderData['id'])) {
 
                     // Use variant title if available
                     $variant = isset($subItem['variant_title']) ? $subItem['variant_title'] : '';
+                    $itemString = $trimmed;
                     if ($variant !== '') {
-                        $descriptionParts[] = $trimmed . ' : ' . $variant;
-                    } else {
-                        // If no variant title, just add trimmed title
-                        $descriptionParts[] = $trimmed;
+                        $itemString .= ' : ' . $variant;
                     }
+
+                    // Add Sub Item Properties
+                    $subProps = $formatProperties($subItem);
+                    if (!empty($subProps)) {
+                        $itemString .= ' (' . implode(', ', $subProps) . ')';
+                    }
+
+                    $descriptionParts[] = $itemString;
                 }
 
-                // Prepend base/main title to description (if available) and then add sub-items
+                // Construct final description
                 if ($baseTitle !== '') {
+                    $description = $baseTitle;
                     if (count($descriptionParts) > 0) {
-                        $description = $baseTitle . ' ; ' . implode(' ; ', $descriptionParts);
-                    } else {
-                        $description = $baseTitle;
+                        $description .= ' ; ' . implode(' ; ', $descriptionParts);
                     }
                 } else {
                     $description = implode(' ; ', $descriptionParts);
