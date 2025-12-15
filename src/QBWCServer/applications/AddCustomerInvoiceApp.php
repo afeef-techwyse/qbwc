@@ -7,7 +7,7 @@ use QBWCServer\response\SendRequestXML;
 
 class AddCustomerInvoiceApp extends AbstractQBWCApplication
 {
-    private $dsn = "mysql:host=198.136.53.98;dbname=techwyse_shopify_ptl_db;charset=utf8mb4";
+    private $dsn = "mysql:host=localhost;dbname=techwyse_shopify_ptl_db;charset=utf8mb4";
     private $dbUser = "techwyse_shopify_ptl_user";
     private $dbPass = "^Y!1iOEn?O3p";
 
