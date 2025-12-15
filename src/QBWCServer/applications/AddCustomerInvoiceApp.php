@@ -24,15 +24,10 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
      * QuickBooks Item FullName max length is 31 characters.
      * Uses multibyte-safe functions to preserve UTF-8.
      *
-     * @param string $name
-     * @return string
+     * Clean string of common non-ASCII characters that break QBXML.
      */
-    /**
-     * Normalize and truncate item FullName for QuickBooks.
-     */
-    private function normalizeItemFullName($name)
+    private function cleanString($str)
     {
-        // Replace smart quotes and other common problem characters
         $replacements = [
             '“' => '"',
             '”' => '"',
@@ -42,11 +37,19 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
             '—' => '-',
             '…' => '...'
         ];
-        $name = strtr($name, $replacements);
+        // Normalize newlines to spaces for single-line fields if needed, 
+        // but for descriptions newlines might be okay. 
+        // For now, simple replacement.
+        return strtr(trim((string) $str), $replacements);
+    }
 
-        // Remove any other non-ASCII characters if necessary, or just rely on UTF-8
-        // For now, let's just trim and truncate
-        $name = trim((string) $name);
+    /**
+     * Normalize and truncate item FullName for QuickBooks.
+     * QuickBooks Item FullName max length is 31 characters.
+     */
+    private function normalizeItemFullName($name)
+    {
+        $name = $this->cleanString($name);
 
         if ($name === '') {
             return 'Unknown Item';
@@ -172,10 +175,10 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
                 // title is the Item FullName used in QuickBooks; ensure it's <= 31 chars
                 'title' => $this->normalizeItemFullName($rawTitle),
                 // keep the original (longer) display name in 'name' for descriptions
-                'name' => $item['title'] ?? $item['name'] ?? '',
+                'name' => $this->cleanString($item['title'] ?? $item['name'] ?? ''),
                 'quantity' => isset($item['quantity']) ? (int) $item['quantity'] : 1,
                 'price' => $item['price'] ?? $item['total_price'] ?? '0.00',
-                'description' => $item['description'] ?? ($item['name'] ?? $item['title'] ?? '')
+                'description' => $this->cleanString($item['description'] ?? ($item['name'] ?? $item['title'] ?? ''))
             ];
         }
 
@@ -184,17 +187,17 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
             'id' => $shopifyData['order_id'] ?? $shopifyData['id'] ?? $dbId,
             'order_number' => $shopifyData['order_number'] ?? $shopifyData['name'] ?? "ORD-{$dbId}",
             'customer' => [
-                'first_name' => $customer['first_name'] ?? '',
-                'last_name' => $customer['last_name'] ?? '',
-                'email' => $customer['email'] ?? '',
-                'phone' => $shippingAddress['phone'] ?? $customer['phone'] ?? '',
+                'first_name' => $this->cleanString($customer['first_name'] ?? ''),
+                'last_name' => $this->cleanString($customer['last_name'] ?? ''),
+                'email' => $this->cleanString($customer['email'] ?? ''),
+                'phone' => $this->cleanString($shippingAddress['phone'] ?? $customer['phone'] ?? ''),
                 'default_address' => [
-                    'company' => $shippingAddress['company'] ?? '',
-                    'address1' => $shippingAddress['address1'] ?? $shippingAddress['address_1'] ?? '',
-                    'city' => $shippingAddress['city'] ?? '',
-                    'province' => $shippingAddress['province'] ?? $shippingAddress['province_code'] ?? '',
-                    'zip' => $shippingAddress['zip'] ?? $shippingAddress['postal_code'] ?? '',
-                    'country' => $shippingAddress['country'] ?? ''
+                    'company' => $this->cleanString($shippingAddress['company'] ?? ''),
+                    'address1' => $this->cleanString($shippingAddress['address1'] ?? $shippingAddress['address_1'] ?? ''),
+                    'city' => $this->cleanString($shippingAddress['city'] ?? ''),
+                    'province' => $this->cleanString($shippingAddress['province'] ?? $shippingAddress['province_code'] ?? ''),
+                    'zip' => $this->cleanString($shippingAddress['zip'] ?? $shippingAddress['postal_code'] ?? ''),
+                    'country' => $this->cleanString($shippingAddress['country'] ?? '')
                 ]
             ],
             'line_items' => $transformedLineItems
