@@ -171,13 +171,125 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
         $transformedLineItems = [];
         foreach ($lineItems as $item) {
             $rawTitle = $item['sku'] ?? $item['title'] ?? $item['name'] ?? 'Unknown Item';
+
+            // --- SPLIT-ON-SYNC LOGIC START ---
+            $price = (float) ($item['price'] ?? $item['total_price'] ?? 0);
+            $mainLinePrice = $price;
+            $addonLines = [];
+
+            if (isset($item['properties']) && is_array($item['properties'])) {
+                $addonsFound = [];
+                foreach ($item['properties'] as $prop) {
+                    $pName = is_array($prop) ? ($prop['name'] ?? '') : ($prop->name ?? '');
+                    $pValue = is_array($prop) ? ($prop['value'] ?? '') : ($prop->value ?? '');
+
+                    // Check for consolidated format: "Value (SKU: xxx ; Price: yyy)"
+                    if (strpos($pName, 'Addon:') === 0) {
+                        // Parse $pValue for SKU and Price
+                        if (preg_match('/\(SKU:\s*(.*?)\s*;\s*Price:\s*(.*?)\)/i', $pValue, $matches)) {
+                            // Name format "Addon: Key"
+                            $key = trim(substr($pName, strlen('Addon:')));
+                            if (!isset($addonsFound[$key]))
+                                $addonsFound[$key] = [];
+
+                            $addonsFound[$key]['sku'] = trim($matches[1]);
+                            $addonsFound[$key]['price'] = trim($matches[2]);
+                        }
+                    }
+
+                    if (strpos($pName, 'Addon SKU:') === 0) {
+                        $key = trim(substr($pName, strlen('Addon SKU:')));
+                        if (!isset($addonsFound[$key]))
+                            $addonsFound[$key] = [];
+                        $addonsFound[$key]['sku'] = $pValue;
+                    }
+                    if (strpos($pName, 'Addon Price:') === 0) {
+                        $key = trim(substr($pName, strlen('Addon Price:')));
+                        if (!isset($addonsFound[$key]))
+                            $addonsFound[$key] = [];
+                        $addonsFound[$key]['price'] = $pValue;
+                    }
+                }
+            } else {
+                // FALLBACK: Parse from description string if properties array is undefined
+                $desc = $item['description'] ?? '';
+                if ($desc) {
+                    $parts = explode(';', $desc);
+                    $addonsFound = [];
+                    foreach ($parts as $part) {
+                        $part = trim($part);
+
+                        // Check for consolidated format in description "Addon: Key: Value (SKU: S; Price: P)"
+                        if (strpos($part, 'Addon:') === 0) {
+                            if (preg_match('/Addon:\s*(.*?):\s*.*\(SKU:\s*(.*?)\s*;\s*Price:\s*(.*?)\)/i', $part, $matches)) {
+                                $key = trim($matches[1]);
+                                if (!isset($addonsFound[$key]))
+                                    $addonsFound[$key] = [];
+                                $addonsFound[$key]['sku'] = trim($matches[2]);
+                                $addonsFound[$key]['price'] = trim($matches[3]);
+                            }
+                        }
+
+                        // Format: "Addon SKU: Key: SKU"
+                        if (strpos($part, 'Addon SKU:') === 0) {
+                            $remainder = trim(substr($part, 10)); // remove "Addon SKU:"
+                            $lastColon = strrpos($remainder, ':');
+                            if ($lastColon !== false) {
+                                $key = trim(substr($remainder, 0, $lastColon));
+                                $value = trim(substr($remainder, $lastColon + 1));
+                                if (!isset($addonsFound[$key]))
+                                    $addonsFound[$key] = [];
+                                $addonsFound[$key]['sku'] = $value;
+                            }
+                        }
+                        // Format: "Addon Price: Key: Price"
+                        if (strpos($part, 'Addon Price:') === 0) {
+                            $remainder = trim(substr($part, 12)); // remove "Addon Price:"
+                            $lastColon = strrpos($remainder, ':');
+                            if ($lastColon !== false) {
+                                $key = trim(substr($remainder, 0, $lastColon));
+                                $value = trim(substr($remainder, $lastColon + 1));
+                                if (!isset($addonsFound[$key]))
+                                    $addonsFound[$key] = [];
+                                $addonsFound[$key]['price'] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!empty($addonsFound)) {
+                foreach ($addonsFound as $key => $data) {
+                    $this->log("Split-on-Sync: Processing found addon key '$key': " . json_encode($data));
+                    if (isset($data['sku']) && isset($data['price'])) {
+                        $this->log("Split-on-Sync: Found Addon SKU {$data['sku']} with price {$data['price']}. Splitting from main item.");
+                        $aPrice = (float) $data['price'];
+                        $aPriceFmt = number_format($aPrice, 2, '.', '');
+                        // Deduct from Main
+                        $mainLinePrice -= $aPrice;
+
+                        $addonName = $data['sku']; // Use SKU as Title for ItemRef
+
+                        $transformedLineItems[] = [
+                            'title' => $this->normalizeItemFullName($addonName),
+                            'name' => "Addon: $key",
+                            'quantity' => isset($item['quantity']) ? (int) $item['quantity'] : 1,
+                            'price' => $aPriceFmt,
+                            // Explicit description or same as name
+                            'description' => "Addon: $key"
+                        ];
+                    }
+                }
+            }
+            // --- SPLIT-ON-SYNC LOGIC END ---
+
             $transformedLineItems[] = [
                 // title is the Item FullName used in QuickBooks; ensure it's <= 31 chars
                 'title' => $this->normalizeItemFullName($rawTitle),
                 // keep the original (longer) display name in 'name' for descriptions
                 'name' => $this->cleanString($item['title'] ?? $item['name'] ?? ''),
                 'quantity' => isset($item['quantity']) ? (int) $item['quantity'] : 1,
-                'price' => $item['price'] ?? $item['total_price'] ?? '0.00',
+                'price' => number_format($mainLinePrice, 2, '.', ''), // Use Reduced Price
                 'description' => $this->cleanString($item['description'] ?? ($item['name'] ?? $item['title'] ?? ''))
             ];
         }

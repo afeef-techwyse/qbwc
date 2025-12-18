@@ -6,20 +6,21 @@
 
 echo "=== QBWC State Reset Script ===\n";
 
-$stateFile = 'C:\tmp\qbwc_app_state.json';
-$debugFile = 'C:\tmp\qbwc_app_debug.log';
+$stateFile = sys_get_temp_dir() . '/qbwc_app_state.json';
+// The app logs to __DIR__ . '/qbwc_add_customer_invoice_app.log'
+$debugFile = __DIR__ . '/qbwc_add_customer_invoice_app.log';
 
 // Backup current state
 if (file_exists($stateFile)) {
     $backupFile = 'C:\tmp\qbwc_app_state_backup_' . date('Y-m-d_H-i-s') . '.json';
     copy($stateFile, $backupFile);
     echo "Backed up state to: $backupFile\n";
-    
+
     // Show current state
     $state = json_decode(file_get_contents($stateFile), true);
     echo "Current state before reset:\n";
     print_r($state);
-    
+
     // Reset state
     unlink($stateFile);
     echo "State file deleted: $stateFile\n";
@@ -32,7 +33,7 @@ if (file_exists($debugFile)) {
     $backupLog = 'C:\tmp\qbwc_app_debug_backup_' . date('Y-m-d_H-i-s') . '.log';
     copy($debugFile, $backupLog);
     echo "Backed up debug log to: $backupLog\n";
-    
+
     // Clear the log
     file_put_contents($debugFile, '');
     echo "Debug log cleared: $debugFile\n";
