@@ -38,7 +38,8 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
     private function getPDO()
     {
         static $p = null;
-        if ($p) return $p;
+        if ($p)
+            return $p;
         $p = new \PDO($this->dsn, $this->dbUser, $this->dbPass, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
@@ -91,7 +92,8 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
             $this->customerName = trim(($order['customer']['first_name'] ?? '') . ' ' . ($order['customer']['last_name'] ?? ''));
             $this->stage = $this->currentOrder['status'] ?? 'pending';
             // normalize pending -> query_customer
-            if ($this->stage === 'pending') $this->stage = 'query_customer';
+            if ($this->stage === 'pending')
+                $this->stage = 'query_customer';
         } else {
             $order = json_decode($this->currentOrder['payload'], true);
         }
@@ -143,14 +145,81 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
 
             $itemsXml = '';
             foreach ($order['line_items'] ?? [] as $item) {
-                // Use item title/name as ItemRef.FullName — ensure those items exist in QB or replace with a default service item
+                // Check if this item has "Addon SKU: xxx" properties
+                // Properties format in Shopify JSON: usually array of {name, value} objects
+                // We need to parse them.
+
+                $price = (float) ($item['price'] ?? 0);
+                $addonLines = [];
+                $mainLinePrice = $price;
+
+                if (isset($item['properties']) && is_array($item['properties'])) {
+                    // We might have multiple addons on one line? 
+                    // The frontend logic pushes {Name: "Addon SKU: ...", Value: "SKU"} and {Name: "Addon Price: ...", Value: "Price"}
+                    // Since properties are a flat list, we need to pair them up or assume order?
+                    // Better: We iterate and look for pairs. Or if we only support 1 addon per line?
+                    // But our logic theoretically allows multiple.
+                    // However, finding pairs in a flat list by name "Addon SKU: Name" matching "Addon Price: Name" is safer.
+
+                    // Let's identify addons by parsing property names.
+                    $addonsFound = [];
+                    foreach ($item['properties'] as $prop) {
+                        $pName = $prop['name'];
+                        $pValue = $prop['value'];
+
+                        if (strpos($pName, 'Addon SKU:') === 0) {
+                            // Found a SKU. "Addon SKU: Start Package" -> Key "Start Package"
+                            $key = trim(substr($pName, strlen('Addon SKU:')));
+                            if (!isset($addonsFound[$key]))
+                                $addonsFound[$key] = [];
+                            $addonsFound[$key]['sku'] = $pValue;
+                        }
+                        if (strpos($pName, 'Addon Price:') === 0) {
+                            $key = trim(substr($pName, strlen('Addon Price:')));
+                            if (!isset($addonsFound[$key]))
+                                $addonsFound[$key] = [];
+                            $addonsFound[$key]['price'] = $pValue;
+                        }
+                    }
+
+                    // Process found addons
+                    foreach ($addonsFound as $addonKey => $addonData) {
+                        if (isset($addonData['sku']) && isset($addonData['price'])) {
+                            $aPrice = (float) $addonData['price'];
+                            $aSku = $addonData['sku'];
+
+                            // Deduct from main line total unit price
+                            // Note: $item['price'] is unit price. 
+                            $mainLinePrice -= $aPrice;
+
+                            // Create Addon Line
+                            // Quantity matches parent? Yes.
+                            $qty = (int) ($item['quantity'] ?? 1);
+
+                            $addonLines[] = '
+                              <InvoiceLineAdd>
+                                <ItemRef><FullName>' . $this->xmlEscape($aSku) . '</FullName></ItemRef>
+                                <Desc>' . $this->xmlEscape("Addon: " . $addonKey) . '</Desc>
+                                <Quantity>' . $qty . '</Quantity>
+                                <Rate>' . $this->xmlEscape(number_format($aPrice, 2, '.', '')) . '</Rate>
+                              </InvoiceLineAdd>';
+                        }
+                    }
+                }
+
+                // Add Main Line
                 $itemsXml .= '
                   <InvoiceLineAdd>
                     <ItemRef><FullName>' . $this->xmlEscape($item['title'] ?? $item['name'] ?? 'Item') . '</FullName></ItemRef>
                     <Desc>' . $this->xmlEscape($item['name'] ?? '') . '</Desc>
-                    <Quantity>' . (int)($item['quantity'] ?? 1) . '</Quantity>
-                    <Rate>' . $this->xmlEscape($item['price'] ?? '0.00') . '</Rate>
+                    <Quantity>' . (int) ($item['quantity'] ?? 1) . '</Quantity>
+                    <Rate>' . $this->xmlEscape(number_format($mainLinePrice, 2, '.', '')) . '</Rate>
                   </InvoiceLineAdd>';
+
+                // Add Addon Lines
+                foreach ($addonLines as $aLine) {
+                    $itemsXml .= $aLine;
+                }
             }
 
             $inner = '<InvoiceAddRq requestID="' . $this->generateGUID() . '">
@@ -246,7 +315,8 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
         );
         $stmt->execute();
         $row = $stmt->fetch();
-        if ($row) return $row;
+        if ($row)
+            return $row;
 
         // otherwise pick first pending
         $stmt = $this->getPDO()->prepare("SELECT * FROM orders_queue WHERE status = 'pending' ORDER BY id ASC LIMIT 1");
@@ -259,7 +329,7 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
         $stmt = $this->getPDO()->prepare("UPDATE orders_queue SET status = :status WHERE id = :id");
         $stmt->execute([':status' => $status, ':id' => $id]);
         // update in-memory copy if matches
-        if ($this->currentOrder && (int)$this->currentOrder['id'] === (int)$id) {
+        if ($this->currentOrder && (int) $this->currentOrder['id'] === (int) $id) {
             $this->currentOrder['status'] = $status;
         }
     }
@@ -277,22 +347,22 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
             return trim(com_create_guid(), '{}');
         }
         // fallback:
-        return strtoupper(md5(uniqid((string)rand(), true)));
+        return strtoupper(md5(uniqid((string) rand(), true)));
     }
 
     private function wrapQBXML($qbxmlVersion, $innerXml)
     {
         return '<?xml version="1.0" encoding="utf-8"?>' . "\n" .
-               '<?qbxml version="' . $this->xmlEscape($qbxmlVersion) . '"?>' . "\n" .
-               '<QBXML>' . "\n" .
-               '  <QBXMLMsgsRq onError="stopOnError">' . "\n" .
-               $innerXml . "\n" .
-               '  </QBXMLMsgsRq>' . "\n" .
-               '</QBXML>';
+            '<?qbxml version="' . $this->xmlEscape($qbxmlVersion) . '"?>' . "\n" .
+            '<QBXML>' . "\n" .
+            '  <QBXMLMsgsRq onError="stopOnError">' . "\n" .
+            $innerXml . "\n" .
+            '  </QBXMLMsgsRq>' . "\n" .
+            '</QBXML>';
     }
 
     private function xmlEscape($s)
     {
-        return htmlspecialchars((string)$s, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+        return htmlspecialchars((string) $s, ENT_XML1 | ENT_QUOTES, 'UTF-8');
     }
 }
