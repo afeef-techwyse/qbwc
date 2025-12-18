@@ -183,18 +183,29 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
                     $pName = is_array($prop) ? ($prop['name'] ?? '') : ($prop->name ?? '');
                     $pValue = is_array($prop) ? ($prop['value'] ?? '') : ($prop->value ?? '');
 
-                    // Check for consolidated format: "Value (SKU: xxx ; Price: yyy)"
-                    if (strpos($pName, 'Addon:') === 0) {
-                        // Parse $pValue for SKU and Price
-                        if (preg_match('/\(SKU:\s*(.*?)\s*;\s*Price:\s*(.*?)\)/i', $pValue, $matches)) {
-                            // Name format "Addon: Key"
-                            $key = trim(substr($pName, strlen('Addon:')));
-                            if (!isset($addonsFound[$key]))
-                                $addonsFound[$key] = [];
+                    // Check for consolidated format: "Variant Name (SKU: xxx ; Price: yyy)"
+                    // Property Name is the Category (e.g. "Ladders & Steps")
+                    if (preg_match('/^(.*?)\s*\(SKU:\s*(.*?)\s*;\s*Price:\s*(.*?)\)/i', $pValue, $matches)) {
+                        $key = trim($pName); // Category
+                        $variantTitle = trim($matches[1]);
 
-                            $addonsFound[$key]['sku'] = trim($matches[1]);
-                            $addonsFound[$key]['price'] = trim($matches[2]);
-                        }
+                        if (!isset($addonsFound[$key]))
+                            $addonsFound[$key] = [];
+                        $addonsFound[$key]['sku'] = trim($matches[2]);
+                        $addonsFound[$key]['price'] = str_replace(['$', ','], '', trim($matches[3]));
+                        $addonsFound[$key]['variant'] = $variantTitle;
+                    }
+
+                    // Legacy "Addon:" handling (keep for safety)
+                    if (strpos($pName, 'Addon:') === 0 && preg_match('/\(SKU:\s*(.*?)\s*;\s*Price:\s*(.*?)\)/i', $pValue, $matches)) {
+                        $key = trim(substr($pName, strlen('Addon:')));
+                        if (!isset($addonsFound[$key]))
+                            $addonsFound[$key] = [];
+                        $addonsFound[$key]['sku'] = trim($matches[1]);
+                        $addonsFound[$key]['price'] = str_replace(['$', ','], '', trim($matches[2]));
+                        // Try to extract variant title from value if possible, else default
+                        $vTitle = preg_replace('/\(SKU:.*\)/i', '', $pValue);
+                        $addonsFound[$key]['variant'] = trim($vTitle);
                     }
 
                     if (strpos($pName, 'Addon SKU:') === 0) {
@@ -207,51 +218,72 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
                         $key = trim(substr($pName, strlen('Addon Price:')));
                         if (!isset($addonsFound[$key]))
                             $addonsFound[$key] = [];
-                        $addonsFound[$key]['price'] = $pValue;
+                        $addonsFound[$key]['price'] = str_replace(['$', ','], '', $pValue);
                     }
                 }
             } else {
                 // FALLBACK: Parse from description string if properties array is undefined
                 $desc = $item['description'] ?? '';
                 if ($desc) {
+                    // 1. Generalized Consolidated Format
+                    // Matches: "Category: Variant Name (SKU: S [;|] Price: P)"
+                    // We look for "Key: Value (SKU..." pattern with NO "Addon SKU" allowed in Key.
+                    if (preg_match_all('/(?:^|;)\s*([^:;]+):\s*([^:;]+?)\s*\(SKU:\s*(.*?)\s*[;|]\s*Price:\s*(.*?)\)/i', $desc, $matches, PREG_SET_ORDER)) {
+                        foreach ($matches as $m) {
+                            $key = trim($m[1]);
+                            // Skip legacy keys if they match by accident (unlikely with strict regex)
+                            if (strpos($key, 'Addon SKU') === 0 || strpos($key, 'Addon Price') === 0)
+                                continue;
+
+                            $variantTitle = trim($m[2]);
+
+                            if (!isset($addonsFound[$key]))
+                                $addonsFound[$key] = [];
+                            $addonsFound[$key]['sku'] = trim($m[3]);
+                            $addonsFound[$key]['price'] = str_replace(['$', ','], '', trim($m[4]));
+                            $addonsFound[$key]['variant'] = $variantTitle;
+                        }
+                    }
+
+                    // 2. Legacy "Addon:" Prefix Format (if still present)
+                    if (preg_match_all('/Addon:\s*(.*?):\s*(.*?)\s*\(SKU:\s*(.*?)\s*[;|]\s*Price:\s*(.*?)\)/i', $desc, $matches, PREG_SET_ORDER)) {
+                        foreach ($matches as $m) {
+                            $key = trim($m[1]);
+                            $variantTitle = trim($m[2]);
+                            if (!isset($addonsFound[$key]))
+                                $addonsFound[$key] = [];
+                            $addonsFound[$key]['sku'] = trim($m[3]);
+                            $addonsFound[$key]['price'] = str_replace(['$', ','], '', trim($m[4]));
+                            $addonsFound[$key]['variant'] = $variantTitle;
+                        }
+                    }
+
+                    // 3. Legacy Separated Format Support via Explode
                     $parts = explode(';', $desc);
-                    $addonsFound = [];
                     foreach ($parts as $part) {
                         $part = trim($part);
-
-                        // Check for consolidated format in description "Addon: Key: Value (SKU: S; Price: P)"
-                        if (strpos($part, 'Addon:') === 0) {
-                            if (preg_match('/Addon:\s*(.*?):\s*.*\(SKU:\s*(.*?)\s*;\s*Price:\s*(.*?)\)/i', $part, $matches)) {
-                                $key = trim($matches[1]);
-                                if (!isset($addonsFound[$key]))
-                                    $addonsFound[$key] = [];
-                                $addonsFound[$key]['sku'] = trim($matches[2]);
-                                $addonsFound[$key]['price'] = trim($matches[3]);
-                            }
-                        }
-
-                        // Format: "Addon SKU: Key: SKU"
                         if (strpos($part, 'Addon SKU:') === 0) {
-                            $remainder = trim(substr($part, 10)); // remove "Addon SKU:"
+                            $remainder = trim(substr($part, 10));
                             $lastColon = strrpos($remainder, ':');
                             if ($lastColon !== false) {
                                 $key = trim(substr($remainder, 0, $lastColon));
                                 $value = trim(substr($remainder, $lastColon + 1));
                                 if (!isset($addonsFound[$key]))
                                     $addonsFound[$key] = [];
-                                $addonsFound[$key]['sku'] = $value;
+                                if (!isset($addonsFound[$key]['sku']))
+                                    $addonsFound[$key]['sku'] = $value;
                             }
                         }
-                        // Format: "Addon Price: Key: Price"
                         if (strpos($part, 'Addon Price:') === 0) {
-                            $remainder = trim(substr($part, 12)); // remove "Addon Price:"
+                            $remainder = trim(substr($part, 12));
                             $lastColon = strrpos($remainder, ':');
                             if ($lastColon !== false) {
                                 $key = trim(substr($remainder, 0, $lastColon));
                                 $value = trim(substr($remainder, $lastColon + 1));
                                 if (!isset($addonsFound[$key]))
                                     $addonsFound[$key] = [];
-                                $addonsFound[$key]['price'] = $value;
+                                if (!isset($addonsFound[$key]['price']))
+                                    $addonsFound[$key]['price'] = str_replace(['$', ','], '', $value);
                             }
                         }
                     }
@@ -269,14 +301,16 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
                         $mainLinePrice -= $aPrice;
 
                         $addonName = $data['sku']; // Use SKU as Title for ItemRef
+                        $variantName = $data['variant'] ?? '';
+                        $desc = $variantName ? "$key: $variantName" : "Addon: $key";
 
                         $transformedLineItems[] = [
                             'title' => $this->normalizeItemFullName($addonName),
-                            'name' => "Addon: $key",
+                            'name' => $desc, // Use description as Name for logging/debugging
                             'quantity' => isset($item['quantity']) ? (int) $item['quantity'] : 1,
                             'price' => $aPriceFmt,
-                            // Explicit description or same as name
-                            'description' => "Addon: $key"
+                            // Explicit description
+                            'description' => $desc
                         ];
                     }
                 }
