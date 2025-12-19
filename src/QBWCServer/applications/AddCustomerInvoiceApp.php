@@ -294,6 +294,12 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
                 foreach ($addonsFound as $key => $data) {
                     $this->log("Split-on-Sync: Processing found addon key '$key': " . json_encode($data));
                     if (isset($data['sku']) && isset($data['price'])) {
+                        // Check if Addon SKU matches Main SKU
+                        if (strcasecmp($data['sku'], $rawTitle) === 0) {
+                            $this->log("Split-on-Sync: Addon SKU {$data['sku']} matches Main Product SKU. Skipping split (keeping in main line).");
+                            continue;
+                        }
+
                         $this->log("Split-on-Sync: Found Addon SKU {$data['sku']} with price {$data['price']}. Splitting from main item.");
                         $aPrice = (float) $data['price'];
                         $aPriceFmt = number_format($aPrice, 2, '.', '');
