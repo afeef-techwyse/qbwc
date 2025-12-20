@@ -523,7 +523,7 @@ class AddCustomerInvoiceApp extends AbstractQBWCApplication
             $this->log("Preparing InvoiceAdd for order {$order['order_number']}");
             $xml = '<?xml version="1.0" encoding="utf-8"?>' .
                 "\n<?qbxml version=\"{$qbxmlVersion}\"?>\n" .
-                "<QBXML>\n  <QBXMLMsgsRq onError=\"stopOnError\">\n    <InvoiceAddRq requestID=\"" . $this->generateGUID() . "\">\n      <InvoiceAdd>\n        <CustomerRef><FullName>" . htmlentities($this->customerName, ENT_XML1, 'UTF-8') . "</FullName></CustomerRef>\n        <RefNumber>" . htmlentities($order['order_number'], ENT_XML1, 'UTF-8') . "</RefNumber>\n        <Memo>Order #" . htmlentities($order['order_number'], ENT_XML1, 'UTF-8') . "</Memo>\n";
+                "<QBXML>\n  <QBXMLMsgsRq onError=\"stopOnError\">\n    <InvoiceAddRq requestID=\"" . $this->generateGUID() . "\">\n      <InvoiceAdd>\n        <CustomerRef><FullName>" . htmlentities($this->customerName, ENT_XML1, 'UTF-8') . "</FullName></CustomerRef>\n        <RefNumber>" . htmlentities($order['order_number'], ENT_XML1, 'UTF-8') . "</RefNumber>\n        <Memo>Order " . htmlentities($order['order_number'], ENT_XML1, 'UTF-8') . "</Memo>\n";
 
             foreach ($order['line_items'] as $item) {
                 $lineQty = isset($item['quantity']) ? (int) $item['quantity'] : 1;
